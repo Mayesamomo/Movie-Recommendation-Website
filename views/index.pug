@@ -1,0 +1,24 @@
+extends layout
+
+block main-content
+  div.container.main-container
+    main
+      .movie-list
+        each movie in movieList
+          .movie-card
+            a(href=`/movie/${movie.id}`)
+              img(src=`https://image.tmdb.org/t/p/w500/${movie.poster_path}`, alt=movie.title)
+              .movie-details
+                h2= movie.title
+                p Release Date: #{movie.release_date}
+                p Rating: #{movie.vote_average}
+      .pagination
+        if currentPage > 1
+          a(href=`/?page=${currentPage - 1}`) Previous
+        - for (let i = 1; i <= totalPages; i++)
+          if currentPage === i
+            span.page-number= i
+          else
+            a.page-number(href=`/?page=${i}`)= i
+        if currentPage < totalPages
+          a(href=`/?page=${currentPage + 1}`) Next

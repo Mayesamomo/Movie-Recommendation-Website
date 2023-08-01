@@ -1,0 +1,13 @@
+// layouts/main-layout.pug
+doctype html
+html
+  head
+    title= title
+  body
+    include ../views/header.pug
+
+    // Content from individual pages will be included here
+    block content
+
+    include ../components/trending-movies.pug
+    include ../components/personalized-recommendations.pug

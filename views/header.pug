@@ -1,0 +1,15 @@
+header
+  nav#navbar
+    div.container
+      a.navbar-brand(href='/') My Movie App
+      //- button.toggle-btn
+      ul.navbar-menu
+        li
+          a(href='/') Home
+        li
+          a(href='/recommended') Recommended Movies
+      form.search-form(action="/search", method="GET")
+        input.search-input(type='search', id='searchInput', placeholder='Search', aria-label='Search')
+        button.search-btn(type='submit') Search
+
+div#searchResultsContainer

@@ -1,0 +1,28 @@
+extends layout
+
+block main-content
+  h1= title
+
+  .movie-container.grid-container
+    each movie in movieList
+      .card.grid-item
+        a(href=`/movie/${movie.id}`)
+          img.card-img-top(src=`https://image.tmdb.org/t/p/w500${movie.poster_path}`, alt=movie.title)
+          .card-body
+            h5.card-title= movie.title
+             p Release Date: #{movie.release_date}
+             p Rating: #{movie.vote_average}
+
+  if totalPages > 1
+    ul.pagination.justify-content-center.mt-4
+      if currentPage > 1
+        li.page-item
+          a.page-link(href=`/recommended?page=${currentPage - 1}`) Previous
+
+      each page in Array.from({ length: totalPages }, (_, i) => i + 1)
+        li.page-item(class=currentPage === page ? 'active' : '')
+          a.page-link(href=`/recommended?page=${page}`)= page
+
+      if currentPage < totalPages
+        li.page-item
+          a.page-link(href=`/recommended?page=${currentPage + 1}`) Next

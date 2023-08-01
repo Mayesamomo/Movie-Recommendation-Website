@@ -1,0 +1,36 @@
+extends layout
+
+block main-content
+  .main-container
+    .movie-details
+      .movie-poster
+        img.movie-img(src=`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`, alt=movieDetails.title)
+        .movie-info
+          h5.movie-title= movieDetails.title
+          p.movie-release-date= movieDetails.release_date
+          p.movie-overview= movieDetails.overview
+
+      .weather-info
+        .weather-card
+          h5.weather-title Weather Information
+          p.weather-text= `Temperature: ${weatherInfo.temperature}°C`
+          p.weather-text= `Description: ${weatherInfo.description}`
+          p.weather-text.weather-icon
+            i.weather-icon(class=`owm owm-${weatherInfo.icon}`)
+          p.weather-text= weatherAdvice
+
+  if movieDetails.recommendations && movieDetails.recommendations.length > 0
+    .similar-movies
+      h2.similar-movies-title Similar Movies
+      .movie-grid
+        each movie in movieDetails.recommendations
+          .movie-col
+            .movie-card
+              img.movie-img(src=`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`, alt=movie.title)
+              .movie-card-body
+                h5.movie-title= movie.title
+                p.movie-release-date= movie.release_date
+                span.movie-release-date= movie.release_date
+  else
+    .no-recommendations
+      p No recommendations available for this movie.
